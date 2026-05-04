@@ -24,6 +24,7 @@ runs/
 !docs/*.html
 !examples/runs/*.html
 !examples/runs/
+!/index.html
 out/
 artifacts/
 

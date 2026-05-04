@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>KoreaSim · Live dashboards</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="KoreaSim — demographically-grounded Korean society simulator. Live dashboards from real Korean news article simulations.">
+<style>
+  :root {
+    --bg: #f5efe1; --ink: #1f1a13; --ink-soft: #5b5347; --ink-mute: #8a8175;
+    --rule: #d8cdb3; --accent: #8b5a1f; --neg: #9c3a14; --pos: #5a7333;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Inter", "Noto Sans KR", -apple-system, sans-serif;
+    max-width: 760px; margin: 48px auto; padding: 0 24px;
+    color: var(--ink); background: var(--bg); line-height: 1.65; font-size: 15px;
+  }
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace; font-size: 0.72rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute);
+  }
+  h1 {
+    font-family: "Noto Serif KR", Georgia, serif;
+    font-size: 2.2rem; font-weight: 700; margin: 4px 0 12px 0; color: var(--ink);
+  }
+  .lede { color: var(--ink-soft); margin-bottom: 28px; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--ink); }
+  h2 {
+    font-family: "Noto Serif KR", Georgia, serif;
+    font-size: 1.1rem; font-weight: 600;
+    margin: 38px 0 14px 0; padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dash {
+    padding: 14px 0; border-bottom: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .dash:last-child { border-bottom: none; }
+  .dash-title {
+    font-family: "Noto Serif KR", Georgia, serif;
+    font-size: 1.05rem; font-weight: 600;
+  }
+  .dash-meta {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--ink-mute); font-size: 0.78rem;
+  }
+  .dash-meta b.opp { color: var(--neg); }
+  .dash-meta b.sup { color: var(--pos); }
+  footer {
+    margin-top: 48px; padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-mute); font-size: 0.78rem;
+    font-family: "JetBrains Mono", monospace; line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="eyebrow">KOREASIM · LIVE DASHBOARDS</div>
+<h1>한국 사회 시뮬레이션 보고서</h1>
+<p class="lede">
+  인구통계 기반으로 합성된 한국인 페르소나 N명에게 실제 뉴스 기사를 던지고,
+  찬·중·반 분포와 그 reasoning을 살펴봅니다. 각 dashboard는 자체 완결형 HTML —
+  지도 · emoji wall · 인구통계 분해 · 출처 박스를 포함합니다.
+</p>
+
+<p>📂 <a href="https://github.com/winhun98/koreasim">소스 · README · 한국어 README · 설치법</a> &nbsp;|&nbsp; 📰 <a href="examples/runs/">결과물 폴더</a></p>
+
+<h2>실제 한국 뉴스 시나리오 (2026-04-29~30)</h2>
+
+<div class="dash">
+  <a class="dash-title" href="examples/runs/khan-co-kr-202604292051005.html">65세 단계적 정년 연장 재추진 →</a>
+  <div class="dash-meta">경향신문 · N=150 · 찬1 / 중67 / <b class="opp">반31</b> · 강도 48 — 40-50대 노동자 강력 반대</div>
+</div>
+
+<div class="dash">
+  <a class="dash-title" href="examples/runs/yna-co-kr-AKR20260430037300003.html">서울 아파트 매매가 20% 하락 (양도세 종료) →</a>
+  <div class="dash-meta">연합뉴스 · N=200 · 찬6 / 중88 / 반6 · 강도 39 — 40대 매수자 ↔ 60-70대 자산보유자</div>
+</div>
+
+<div class="dash">
+  <a class="dash-title" href="examples/runs/yna-co-kr-AKR20260429166500530.html">AI 의료 진단·처방 (취약지 공백 해소) →</a>
+  <div class="dash-meta">연합뉴스 · N=150 · <b class="sup">찬91</b> / 중8 / 반0 · 강도 57 — 사회 합의 + 노년 디지털 디바이드 우려</div>
+</div>
+
+<div class="dash">
+  <a class="dash-title" href="examples/runs/yna-co-kr-AKR20260429064600530.html">아동복지법 '혼외자' 표현 삭제 →</a>
+  <div class="dash-meta">연합뉴스 · N=150 · <b class="sup">찬89</b> / 중10 / 반0 · 강도 57 — 사회 합의 + 70대+ 직접 stake 부재</div>
+</div>
+
+<footer>
+  Generated 2026-04-30 · Qwen3 8B (Q4_K_M) via Ollama · Personas: <a href="https://huggingface.co/datasets/nvidia/Nemotron-Personas-Korea">Nemotron-Personas-Korea</a> · Apache 2.0 · <a href="https://github.com/winhun98/koreasim">github.com/winhun98/koreasim</a>
+</footer>
+
+</body>
+</html>
