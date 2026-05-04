@@ -74,7 +74,7 @@ koreasim run --url "https://www.yna.co.kr/view/AKR20260430037300003" --n 100
 `--url` mode fetches the article, extracts clean body text via
 [`trafilatura`](https://trafilatura.readthedocs.io/), generates a structured
 brief (행위자 · 조치 · 규모 · 대상 · 시점 · 범위 + key quotes) via Qwen3 8B with
-a **verbatim guard** that rejects any number or quote not appearing in the
+a **[verbatim guard](docs/VERIFICATION.md)** that rejects any number or quote not appearing in the
 source, then runs N personas against the brief's summary. Source URL and
 structured brief slots are rendered into the dashboard header so every result
 is traceable back to the original article.
