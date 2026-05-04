@@ -30,6 +30,9 @@ artifacts/
 
 # Personal launch / promotion notes — kept locally, never published.
 docs/PROMOTION.md
+MARKETING.md
+.claude/
+.marketing/
 
 # Data
 data/cache/
