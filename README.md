@@ -354,6 +354,8 @@ asyncio.run(main())
 | Hosted-API dependency | **Local 8B Q4 via Ollama — runs offline on a laptop** |
 | Black-box opinions | Per-persona `narrative` is in the prompt → **fully auditable** |
 
+> 📐 For an in-depth comparison against [Park 2023's *Generative Agents*](https://arxiv.org/abs/2304.03442), [Park 2022's *Social Simulacra*](https://arxiv.org/abs/2208.04024), [AgentSims](https://arxiv.org/abs/2308.04026), and [AutoGen](https://arxiv.org/abs/2308.08155), see [`docs/COMPARISON.md`](docs/COMPARISON.md). Short version: those four solve different problems (multi-day believable behavior · forum prototyping · LLM eval sandbox · multi-agent task-solving). KoreaSim's slot is **one news article → N census-grounded personas → demographic opinion fan-out, locally and free.**
+
 **Honest disclaimer.** This is *not* a substitute for actual polling. Personas are synthetic; LLM reactions are *priors* over what a model thinks people in that demographic *might* say. Use it for hypothesis generation, red-teaming policy proposals, sociological tabletop exercises — not for press headlines.
 
 **Not Korea-only by design.** The persona dataset and prompts are Korean, but the pipeline (article extraction → structured brief → verbatim guard → persona fan-out → demographic aggregation) is locale-agnostic. `koreasim/locales/` ships a Census-inspired US stub that satisfies the same interface — see [`docs/LOCALES.md`](docs/LOCALES.md). Adding a new country is one ~150-LOC file plus prompt translation, not a re-architecture.
