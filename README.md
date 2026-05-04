@@ -11,9 +11,17 @@
 
 *"What does Korea actually think about X?"*
 
-[Quickstart](#-quickstart) · [Live results](#-live-results) · [How it works](#-how-it-works) · [Roadmap](#-roadmap)
+[Quickstart](#-quickstart) · [Live results](#-live-results--real-korean-news-2026-04-2930) · [How it works](#-how-it-works) · [Roadmap](#-roadmap)
+
+🌐 **[한국어 README](README.ko.md)** · **[Live dashboards (GitHub Pages)](https://winhun98.github.io/koreasim/examples/runs/)**
 
 </div>
+
+<a href="https://winhun98.github.io/koreasim/examples/runs/khan-co-kr-202604292051005.html">
+  <img src="docs/images/dashboard-hero.png" alt="KoreaSim sepia dashboard — 정년 연장 시나리오, 한국 시민 150명에게 물었습니다" width="100%">
+</a>
+
+<div align="center"><sub>↑ Sample dashboard — <a href="https://www.khan.co.kr/article/202604292051005">"당정 '65세 단계적 정년 연장' 재추진" (경향신문)</a> · 150 personas · click for full interactive dashboard</sub></div>
 
 ---
 
@@ -85,16 +93,16 @@ simulated against N=150–200 demographically-grounded Korean personas with
 Qwen3 8B Q4_K_M via Ollama. Total compute time: ~140 minutes on a single 8 GB
 GPU — locally **free**.
 
-<a href="examples/runs/khan-co-kr-202604292051005.html">
+<a href="https://winhun98.github.io/koreasim/examples/runs/khan-co-kr-202604292051005.html">
   <img src="examples/runs/khan-co-kr-202604292051005.card.png" alt="65세 단계적 정년 연장 — KoreaSim social card" width="100%">
 </a>
 
 | 기사 | 매체 | N | 찬/중/반 | 강도 | 분기 패턴 |
 |---|---|---:|---|---:|---|
-| **65세 단계적 정년 연장 재추진** ([dashboard](examples/runs/khan-co-kr-202604292051005.html) · [json](examples/runs/khan-co-kr-202604292051005.json)) | 경향신문 | 150 | 1 / 67 / **31** | 48 | **40-50대 노동자 강력 반대** (임금삭감·경영부담) |
-| 서울 아파트 매매가 20% 하락 (양도세 종료) ([dashboard](examples/runs/yna-co-kr-AKR20260430037300003.html) · [json](examples/runs/yna-co-kr-AKR20260430037300003.json)) | 연합뉴스 | 200 | 6 / 88 / 6 | 39 | 40대 매수자 ↔ 60-70대 자산보유자 |
-| AI 의료 진단·처방 (취약지 공백) ([dashboard](examples/runs/yna-co-kr-AKR20260429166500530.html) · [json](examples/runs/yna-co-kr-AKR20260429166500530.json)) | 연합뉴스 | 150 | **91** / 8 / 0 | 57 | 사회 합의 + 노년 디지털 디바이드 |
-| 아동복지법 '혼외자' 표현 삭제 ([dashboard](examples/runs/yna-co-kr-AKR20260429064600530.html) · [json](examples/runs/yna-co-kr-AKR20260429064600530.json)) | 연합뉴스 | 150 | **89** / 10 / 0 | 57 | 사회 합의 + 70대+ 직접 stake 부재 |
+| **65세 단계적 정년 연장 재추진** ([🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/khan-co-kr-202604292051005.html) · [json](examples/runs/khan-co-kr-202604292051005.json)) | 경향신문 | 150 | 1 / 67 / **31** | 48 | **40-50대 노동자 강력 반대** (임금삭감·경영부담) |
+| 서울 아파트 매매가 20% 하락 (양도세 종료) ([🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/yna-co-kr-AKR20260430037300003.html) · [json](examples/runs/yna-co-kr-AKR20260430037300003.json)) | 연합뉴스 | 200 | 6 / 88 / 6 | 39 | 40대 매수자 ↔ 60-70대 자산보유자 |
+| AI 의료 진단·처방 (취약지 공백) ([🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/yna-co-kr-AKR20260429166500530.html) · [json](examples/runs/yna-co-kr-AKR20260429166500530.json)) | 연합뉴스 | 150 | **91** / 8 / 0 | 57 | 사회 합의 + 노년 디지털 디바이드 |
+| 아동복지법 '혼외자' 표현 삭제 ([🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/yna-co-kr-AKR20260429064600530.html) · [json](examples/runs/yna-co-kr-AKR20260429064600530.json)) | 연합뉴스 | 150 | **89** / 10 / 0 | 57 | 사회 합의 + 70대+ 직접 stake 부재 |
 
 > 💡 **Each of the four scenarios produced a distinct demographic split — the
 > simulator separates "manifestly positive policy" (AI 의료·혼외자 표현) from

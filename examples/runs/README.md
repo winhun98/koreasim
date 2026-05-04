@@ -1,13 +1,14 @@
 # Live runs — Real Korean news (2026-04-29 ~ 2026-04-30)
 
 Four real Korean news articles simulated with `koreasim run --url <URL>`.
+**🌐 Open the live dashboards directly via GitHub Pages** (links below) — no clone needed.
 
-| Slug | Source | URL | N | Topic |
+| Slug | Source article | Live dashboard | N | Topic |
 |---|---|---|---:|---|
-| `khan-co-kr-202604292051005` | 경향신문 | [khan.co.kr](https://www.khan.co.kr/article/202604292051005) | 150 | 65세 단계적 정년 연장 재추진 |
-| `yna-co-kr-AKR20260430037300003` | 연합뉴스 | [yna.co.kr](https://www.yna.co.kr/view/AKR20260430037300003) | 200 | 1분기 서울 아파트 전용 84㎡ 매매가 작년보다 20% 하락 |
-| `yna-co-kr-AKR20260429166500530` | 연합뉴스 | [yna.co.kr](https://www.yna.co.kr/view/AKR20260429166500530) | 150 | AI로 진단·처방 보조…취약지 의료 공백 해소 |
-| `yna-co-kr-AKR20260429064600530` | 연합뉴스 | [yna.co.kr](https://www.yna.co.kr/view/AKR20260429064600530) | 150 | 아동복지법서 '혼외자' 표현 삭제 |
+| `khan-co-kr-202604292051005` | [khan.co.kr](https://www.khan.co.kr/article/202604292051005) | [🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/khan-co-kr-202604292051005.html) | 150 | 65세 단계적 정년 연장 재추진 |
+| `yna-co-kr-AKR20260430037300003` | [yna.co.kr](https://www.yna.co.kr/view/AKR20260430037300003) | [🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/yna-co-kr-AKR20260430037300003.html) | 200 | 1분기 서울 아파트 전용 84㎡ 매매가 작년보다 20% 하락 |
+| `yna-co-kr-AKR20260429166500530` | [yna.co.kr](https://www.yna.co.kr/view/AKR20260429166500530) | [🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/yna-co-kr-AKR20260429166500530.html) | 150 | AI로 진단·처방 보조…취약지 의료 공백 해소 |
+| `yna-co-kr-AKR20260429064600530` | [yna.co.kr](https://www.yna.co.kr/view/AKR20260429064600530) | [🌐 dashboard](https://winhun98.github.io/koreasim/examples/runs/yna-co-kr-AKR20260429064600530.html) | 150 | 아동복지법서 '혼외자' 표현 삭제 |
 
 Each slug has 4 files:
 
