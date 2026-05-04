@@ -11,9 +11,11 @@
 
 *"한국은 X에 대해 실제로 어떻게 생각할까?"*
 
+🌐 **[Live dashboards 바로 보기 →](https://winhun98.github.io/koreasim/examples/runs/)** · [English README](README.md)
+
 [빠른 시작](#-빠른-시작) · [실제 결과](#-실제-결과--한국-뉴스-기사-2026-04-2930) · [작동 원리](#-작동-원리) · [로드맵](#-로드맵)
 
-🌐 **[English README](README.md)** · **[Live dashboards (GitHub Pages)](https://winhun98.github.io/koreasim/examples/runs/)**
+> ⭐ **다음 기능 투표는 별로**: 멀티 라운드 dialogue · 영어/일본어 locale 확장 · 실제 여론조사 calibration. 별 많은 순서대로 로드맵에 들어갑니다.
 
 </div>
 
@@ -21,7 +23,7 @@
   <img src="docs/images/dashboard-hero.png" alt="KoreaSim 세피아톤 dashboard — 정년 연장 시나리오, 한국 시민 150명에게 물었습니다" width="100%">
 </a>
 
-<div align="center"><sub>↑ 샘플 dashboard — <a href="https://www.khan.co.kr/article/202604292051005">"당정 '65세 단계적 정년 연장' 재추진" (경향신문)</a> · 150명 페르소나 · 클릭하면 인터랙티브 dashboard</sub></div>
+<div align="center"><sub>↑ 샘플 dashboard — <a href="https://www.khan.co.kr/article/202604292051005">"당정 '65세 단계적 정년 연장' 재추진" (경향신문)</a> · 150명 페르소나 · 클릭하면 인터랙티브 · <code>pip install -e ".[viz]"</code> 로 직접 실행</sub></div>
 
 ---
 

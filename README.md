@@ -11,9 +11,11 @@
 
 *"What does Korea actually think about X?"*
 
+🌐 **[Try the live dashboards →](https://winhun98.github.io/koreasim/examples/runs/)** · [한국어 README](README.ko.md)
+
 [Quickstart](#-quickstart) · [Live results](#-live-results--real-korean-news-2026-04-2930) · [How it works](#-how-it-works) · [Roadmap](#-roadmap)
 
-🌐 **[한국어 README](README.ko.md)** · **[Live dashboards (GitHub Pages)](https://winhun98.github.io/koreasim/examples/runs/)**
+> ⭐ **Star to vote on the next feature**: multi-round dialogue · English/JP locale · real-poll calibration. The roadmap follows the votes.
 
 </div>
 
@@ -21,7 +23,7 @@
   <img src="docs/images/dashboard-hero.png" alt="KoreaSim sepia dashboard — 정년 연장 시나리오, 한국 시민 150명에게 물었습니다" width="100%">
 </a>
 
-<div align="center"><sub>↑ Sample dashboard — <a href="https://www.khan.co.kr/article/202604292051005">"당정 '65세 단계적 정년 연장' 재추진" (경향신문)</a> · 150 personas · click for full interactive dashboard</sub></div>
+<div align="center"><sub>↑ Sample dashboard — <a href="https://www.khan.co.kr/article/202604292051005">"당정 '65세 단계적 정년 연장' 재추진" (경향신문)</a> · 150 personas · click for interactive · <code>pip install -e ".[viz]"</code> to run your own</sub></div>
 
 ---
 
