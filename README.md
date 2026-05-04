@@ -356,6 +356,8 @@ asyncio.run(main())
 
 **Honest disclaimer.** This is *not* a substitute for actual polling. Personas are synthetic; LLM reactions are *priors* over what a model thinks people in that demographic *might* say. Use it for hypothesis generation, red-teaming policy proposals, sociological tabletop exercises — not for press headlines.
 
+**Not Korea-only by design.** The persona dataset and prompts are Korean, but the pipeline (article extraction → structured brief → verbatim guard → persona fan-out → demographic aggregation) is locale-agnostic. `koreasim/locales/` ships a Census-inspired US stub that satisfies the same interface — see [`docs/LOCALES.md`](docs/LOCALES.md). Adding a new country is one ~150-LOC file plus prompt translation, not a re-architecture.
+
 **Empirically-known limitations:**
 - Qwen3 8B has a baseline RLHF bias toward "neutral". KoreaSim mitigates this with `min_p=0.03` sampling + a stake-elicitation prompt + rejection sampling on empty responses, dropping mean neutral from 64% → 51% (see [`docs/SAMPLING.md`](docs/SAMPLING.md)). The remaining 51% includes legitimate neutrals — e.g. non-수도권 personas on housing-price scenarios.
 - Reasoning length is bounded by `max_tokens` — at the default 800 tokens, ~10% of responses get truncated mid-sentence (the parser salvages what it can via brace-counting + regex repair).
@@ -375,6 +377,7 @@ asyncio.run(main())
 - [x] **Auto-generated social card PNG** (1200×630 for X / OG)
 - [x] **Compute receipt** (agents/sec · tokens · throughput)
 - [x] CLI + 5 built-in scenarios
+- [x] **Locale interface** (`koreasim/locales/`) — KR (real, Nemotron-Personas-Korea) + US (Census-inspired stub). See [`docs/LOCALES.md`](docs/LOCALES.md) for adding a new country.
 - [ ] Choropleth Korea map (province polygons)
 - [ ] **Persona ↔ persona dialogue** — let agents argue, not just react
 - [ ] **Multi-round** scenarios — initial reaction → follow-up news → updated stance

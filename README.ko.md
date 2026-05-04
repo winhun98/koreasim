@@ -368,6 +368,8 @@ LLM reaction은 모델이 그 demographic 사람이 *어떻게 말할 것 같은
 뿐입니다. 가설 생성, 정책 제안 red-teaming, 사회학적 tabletop exercise 용도로
 사용하세요 — 언론 헤드라인용 X.
 
+**한국 전용 설계 아닙니다.** 페르소나 데이터셋과 프롬프트는 한국어지만, 파이프라인 (기사 추출 → 구조화 brief → verbatim guard → 페르소나 fan-out → demographic 집계)은 locale-agnostic입니다. `koreasim/locales/`에 미국 Census 기반 stub을 같이 ship — 동일 인터페이스 만족 ([`docs/LOCALES.md`](docs/LOCALES.md) 참조). 새 국가 추가는 ~150 LOC 파일 한 개 + 프롬프트 번역, 재설계 아님.
+
 **경험적으로 알려진 한계:**
 - Qwen3 8B는 RLHF로 "중립" 편향이 baseline. KoreaSim의 `min_p=0.03` + stake-
   elicitation prompt + rejection sampling으로 평균 중립을 64%→51%까지 낮추지만
@@ -391,6 +393,7 @@ LLM reaction은 모델이 그 demographic 사람이 *어떻게 말할 것 같은
 - [x] **Social card PNG 자동 생성** (1200×630 for X / OG)
 - [x] **Compute receipt** (agents/sec · token throughput)
 - [x] CLI + 5개 내장 시나리오
+- [x] **Locale 인터페이스** (`koreasim/locales/`) — KR (real, Nemotron-Personas-Korea) + US (Census 기반 stub). 새 국가 추가 가이드 → [`docs/LOCALES.md`](docs/LOCALES.md)
 - [x] **`--url` 모드** (실제 뉴스 기사 → 구조화 brief → 시뮬레이션)
 - [x] **Verbatim guard** (LLM 할루시네이션 차단)
 - [ ] 한국 지도 choropleth (광역시도 polygon)
