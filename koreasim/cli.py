@@ -215,13 +215,6 @@ async def _run_scenario(
         f"   → {result.n:,} reactions in {result.elapsed_s:.1f}s "
         f"({receipt.agents_per_sec:.0f} agents/sec, {result.n_failed:,} failed)"
     )
-    click.echo(
-        click.style(
-            f"   💸 BitNet local: $0  ·  GPT-4o equivalent would have cost: "
-            f"${receipt.gpt4o_cost_usd:,.2f}",
-            fg="green",
-        )
-    )
 
     summary = summarize(result)
     click.echo("")

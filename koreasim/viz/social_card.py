@@ -16,7 +16,7 @@ Layout:
   │   net +12 (찬성 38% / 중립 36% / 반대 26%)                    │
   │   ▓▓▓▓▓░░░░░░░░░░░░░ stacked bar                             │
   │                                                              │
-  │  BitNet 1.58-bit · $0 vs GPT-4o $5.20 · 0 GPU                │
+  │  BitNet 1.58-bit · local laptop                              │
   └──────────────────────────────────────────────────────────┘
 """
 
@@ -172,23 +172,9 @@ def build_social_card(
         # its own color (plotly annotations don't honor inline-styled spans).
         dict(
             x=0.04, y=0.07, xref="paper", yref="paper",
-            text="BitNet 1.58-bit",
+            text="Qwen3 8B (Q4_K_M) · Ollama · local laptop",
             showarrow=False,
             font=dict(size=20, color="#94a3b8"),
-            xanchor="left", yanchor="bottom",
-        ),
-        dict(
-            x=0.30, y=0.07, xref="paper", yref="paper",
-            text="<b>$0</b> local",
-            showarrow=False,
-            font=dict(size=20, color="#4ade80"),
-            xanchor="left", yanchor="bottom",
-        ),
-        dict(
-            x=0.46, y=0.07, xref="paper", yref="paper",
-            text=f"vs GPT-4o would have cost <b>${receipt.gpt4o_cost_usd:,.2f}</b>",
-            showarrow=False,
-            font=dict(size=20, color="#f87171"),
             xanchor="left", yanchor="bottom",
         ),
         dict(

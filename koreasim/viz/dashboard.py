@@ -735,9 +735,7 @@ def render_text_report(result: ScenarioResult, receipt: ComputeReceipt | None = 
         hero = (
             f"[bold]{result.n:,}[/bold] demographically-grounded Korean agents · "
             f"[cyan]{result.elapsed_s:.1f}s[/cyan] on this machine "
-            f"([dim]{receipt.agents_per_sec:.0f} agents/sec[/dim])\n"
-            f"BitNet 1.58-bit · [bold green]$0[/bold green] vs "
-            f"[bold red]${receipt.gpt4o_cost_usd:,.2f}[/bold red] for GPT-4o equivalent\n\n"
+            f"([dim]{receipt.agents_per_sec:.0f} agents/sec[/dim])\n\n"
             f"[bold cyan]시나리오[/bold cyan]\n{result.scenario}\n\n"
             f"[bold]요약[/bold] · {summary.headline}"
         )
@@ -772,8 +770,7 @@ def render_text_report(result: ScenarioResult, receipt: ComputeReceipt | None = 
         return buf.getvalue()
     except ImportError:
         lines = [
-            f"=== KoreaSim — {result.n:,} agents · {result.elapsed_s:.1f}s · "
-            f"$0 vs GPT-4o ${receipt.gpt4o_cost_usd:,.2f} ===\n"
+            f"=== KoreaSim — {result.n:,} agents · {result.elapsed_s:.1f}s ===\n"
             f"시나리오: {result.scenario}\n{summary.headline}\n"
         ]
         for label, rows in (("연령대별", by_age), ("직업군별", by_occ)):

@@ -30,19 +30,23 @@
 A laptop-scale simulator of how a demographically-accurate slice of Korean society reacts
 to any policy, market shock, or news event.
 
-You give it a sentence ("코스피 -8%, 서킷브레이커 발동"). It runs **N Korean
-agents** through it in parallel — each one grounded in real census data — and returns:
+You give it **a sentence** (`"코스피 -8%, 서킷브레이커 발동"`) **or a real Korean
+news article URL** (the article is fetched, summarised into a structured brief by the
+LLM with a verbatim-quote/number guard, then used as the scenario). KoreaSim runs
+**N Korean agents** through it in parallel — each one grounded in real census data —
+and returns:
 
 - 🇰🇷 South Korea bubble map of net sentiment by 광역시도
 - 🧑‍🤝‍🧑 400-emoji wall of individual reactions (click any avatar to read what they thought)
 - 📊 Demographic breakdowns by age / region / occupation / income / political lean
 - 🖼 1200×630 social card PNG auto-generated for X
+- 📰 *(URL mode)* Source attribution box on the dashboard — structured brief slots (행위자 · 조치 · 규모 · 대상 · 시점 · 범위) and verbatim-checked numeric facts so every result is traceable back to the original article
 
 | | |
 |---|---|
 | **Persona source** | [Nemotron-Personas-Korea](https://huggingface.co/datasets/nvidia/Nemotron-Personas-Korea) — 7M synthetic Koreans grounded in KOSIS census, Supreme Court name distributions, NHIS health records (NVIDIA, April 2026) |
 | **Default model** | [Qwen3 8B Q4_K_M](https://ollama.com/library/qwen3:8b) via Ollama — 5.2GB, strong Korean output. Optional 1.58-bit BitNet presets (`bitnet-2b`, `llama3-8b`) — see [Model presets](#-model-presets). |
-| **Cost vs GPT-4o** | **$0** vs ~$0.21 per 100-agent run |
+| **Where it runs** | Local laptop with Ollama. No external API calls, no per-call cost. |
 | **Throughput (100 agents)** | ~14 min on a 16-core CPU + GPU via Ollama |
 
 ---
@@ -161,7 +165,7 @@ Single PNG, dark theme, 1200×630 (X card spec). The scale + headline number do 
 
 `results/{scenario}.html` — single self-contained file. Five sections:
 
-1. **Hero stats** — `100 agents · 14min · $0 vs $0.21 GPT-4o · net -43`
+1. **Hero stats** — `100 agents · 14min · net -43`
 2. **South Korea bubble map** — 17 광역시도, bubble size = sample N, color = net sentiment, hover for details
 3. **Wall of people** — emoji avatars stratified by region/age. Click any avatar → that persona's full reasoning
 4. **Demographic bars** — stacked sentiment % by age / region / occupation / political lean
@@ -326,7 +330,8 @@ async def main():
         await backend.stop()
 
     receipt = receipt_for_run(result.n, result.elapsed_s)
-    print(f"💸 GPT-4o equivalent saved: ${receipt.gpt4o_cost_usd:.2f}")
+    print(f"{result.n:,} agents in {result.elapsed_s:.1f}s "
+          f"({receipt.agents_per_sec:.0f} agents/sec)")
     print(summarize(result).headline)
 
     build_dashboard(result, "results/kospi.html", receipt=receipt)
@@ -344,7 +349,7 @@ asyncio.run(main())
 | 1 LLM, 1 generic persona | **N personas grounded in real census distributions** |
 | English-centric defaults | Korean naming · regional · political distributions |
 | "Average Korean thinks…" | Per-segment heat maps + dissenting individual quotes |
-| GPT-class API costs ($0.20+ per 100) | **Local 8B Q4 — $0** |
+| Hosted-API dependency | **Local 8B Q4 via Ollama — runs offline on a laptop** |
 | Black-box opinions | Per-persona `narrative` is in the prompt → **fully auditable** |
 
 **Honest disclaimer.** This is *not* a substitute for actual polling. Personas are synthetic; LLM reactions are *priors* over what a model thinks people in that demographic *might* say. Use it for hypothesis generation, red-teaming policy proposals, sociological tabletop exercises — not for press headlines.
@@ -366,7 +371,7 @@ asyncio.run(main())
 - [x] **Korea province bubble map** (17 광역시도, color = net sentiment)
 - [x] **Emoji-avatar people wall** (직업·연령 emoji, 클릭 → 개인 reasoning)
 - [x] **Auto-generated social card PNG** (1200×630 for X / OG)
-- [x] **Compute receipt** ($ saved vs GPT-4o)
+- [x] **Compute receipt** (agents/sec · tokens · throughput)
 - [x] CLI + 5 built-in scenarios
 - [ ] Choropleth Korea map (province polygons)
 - [ ] **Persona ↔ persona dialogue** — let agents argue, not just react

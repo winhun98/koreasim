@@ -30,19 +30,22 @@
 인구통계적으로 정확하게 합성된 한국인 단면이 어떤 정책 · 시장 충격 · 뉴스에 어떻게
 반응할지를 노트북 한 대로 시뮬레이션하는 도구입니다.
 
-문장을 하나 던지면 (예: "코스피 -8%, 서킷브레이커 발동") **N명의 한국인 에이전트**를
-병렬로 돌려 — 각각 실제 인구통계 데이터 기반 — 다음을 돌려줍니다:
+**문장을 하나 던지거나** (예: `"코스피 -8%, 서킷브레이커 발동"`) **실제 한국 뉴스
+기사 URL을 그대로** 던지면 (기사를 fetch해서 LLM이 verbatim-quote 가드와 함께
+구조화된 brief로 요약 후 시나리오로 사용), **N명의 한국인 에이전트**를 병렬로 돌려
+— 각각 실제 인구통계 데이터 기반 — 다음을 돌려줍니다:
 
 - 🇰🇷 17개 광역시도별 net sentiment 한국 지도
 - 🧑‍🤝‍🧑 400개 emoji 페르소나 wall (avatar 클릭 시 그 사람의 reasoning 전문)
 - 📊 연령 / 지역 / 직업 / 소득 / 정치성향별 demographic 분해
 - 🖼 X/OG용 1200×630 social card PNG 자동 생성
+- 📰 *(URL 모드)* dashboard 출처 attribution 박스 — 구조화 brief 슬롯(행위자 · 조치 · 규모 · 대상 · 시점 · 범위)과 verbatim 검증된 숫자/인용으로, 모든 결과를 원문까지 역추적 가능
 
 | | |
 |---|---|
 | **페르소나 출처** | [Nemotron-Personas-Korea](https://huggingface.co/datasets/nvidia/Nemotron-Personas-Korea) — 700만 합성 한국인. KOSIS 인구센서스 + 대법원 성명 분포 + NHIS 건강 기록 기반 (NVIDIA, 2026년 4월) |
 | **기본 모델** | [Qwen3 8B Q4_K_M](https://ollama.com/library/qwen3:8b) (Ollama) — 5.2GB, 한국어 출력 강함. 1.58-bit BitNet 프리셋(`bitnet-2b`, `llama3-8b`)도 옵션 — [모델 프리셋](#-모델-프리셋) 참조. |
-| **GPT-4o 대비 비용** | **$0** vs 100명 1회당 약 $0.21 |
+| **실행 위치** | 로컬 노트북 + Ollama. 외부 API 호출 없음, per-call 비용 없음. |
 | **처리량 (100명 기준)** | 16-core CPU + GPU + Ollama 환경에서 약 14분 |
 
 ---
@@ -89,7 +92,7 @@ LLM 서버 없이 오프라인 템플릿 데모만 보고 싶으면: `koreasim d
 
 2026-04-29~30 사이의 한국 뉴스 기사 4건을 `--url` 모드로 통과시켰습니다. 각각
 N=150~200명의 인구통계 기반 한국인 페르소나가 Qwen3 8B Q4_K_M (Ollama)으로 반응.
-8GB GPU 한 장에서 총 약 140분, 비용 **$0**.
+8GB GPU 한 장에서 총 약 140분, 외부 API 호출 없음.
 
 <a href="https://winhun98.github.io/koreasim/examples/runs/khan-co-kr-202604292051005.html">
   <img src="examples/runs/khan-co-kr-202604292051005.card.png" alt="65세 단계적 정년 연장 — KoreaSim social card" width="100%">
@@ -164,7 +167,7 @@ KoreaSim은 세 층의 mitigation으로 실제 의견 분포를 회복합니다:
 
 `results/{slug}.html` — single self-contained 파일. 5개 섹션:
 
-1. **Hero stats** — `100 agents · 14min · $0 vs $0.21 GPT-4o · net -43`
+1. **Hero stats** — `100 agents · 14min · net -43`
 2. **한국 광역시도 지도** — 17개 도, 색상 = net sentiment, hover 시 표본 정보
 3. **People wall** — 지역/연령 stratified emoji avatar. 클릭 시 그 페르소나의 reasoning 전문
 4. **Demographic bars** — 연령 / 지역 / 직업 / 정치성향별 sentiment 분포 stacked bar
@@ -336,7 +339,8 @@ async def main():
         await backend.stop()
 
     receipt = receipt_for_run(result.n, result.elapsed_s)
-    print(f"💸 GPT-4o equivalent saved: ${receipt.gpt4o_cost_usd:.2f}")
+    print(f"{result.n:,} agents in {result.elapsed_s:.1f}s "
+          f"({receipt.agents_per_sec:.0f} agents/sec)")
     print(summarize(result).headline)
 
     build_dashboard(result, "results/kospi.html", receipt=receipt)
@@ -354,7 +358,7 @@ asyncio.run(main())
 | LLM 1대 + 일반 페르소나 1개 | **실제 인구센서스 분포에 grounded된 N명 페르소나** |
 | 영어 중심 기본값 | 한국 이름 · 지역 · 정치성향 분포 |
 | "한국인은 보통…" | 세그먼트별 heat map + 반대 의견 quote |
-| GPT급 API 비용 ($0.20+ per 100) | **로컬 8B Q4 — $0** |
+| 호스티드 API 의존 | **로컬 8B Q4 + Ollama — 노트북 오프라인 동작** |
 | Black-box 의견 | 페르소나 `narrative`가 prompt에 그대로 → **완전 audit 가능** |
 
 **솔직한 disclaimer.** 이건 실제 여론조사 대체재가 *아닙니다*. 페르소나는 합성이고,
@@ -383,7 +387,7 @@ LLM reaction은 모델이 그 demographic 사람이 *어떻게 말할 것 같은
 - [x] **한국 광역시도 지도** (17개 도, 색 = net sentiment)
 - [x] **Emoji 페르소나 wall** (직업·연령 emoji, 클릭 → 개인 reasoning)
 - [x] **Social card PNG 자동 생성** (1200×630 for X / OG)
-- [x] **Compute receipt** (GPT-4o 대비 $ 절감)
+- [x] **Compute receipt** (agents/sec · token throughput)
 - [x] CLI + 5개 내장 시나리오
 - [x] **`--url` 모드** (실제 뉴스 기사 → 구조화 brief → 시뮬레이션)
 - [x] **Verbatim guard** (LLM 할루시네이션 차단)

@@ -1,10 +1,9 @@
-"""Compute receipt — quantify what running this on a laptop saved.
+"""Compute receipt — quantify the scale and throughput of one scenario run.
 
 The headline numbers KoreaSim needs to communicate:
 - N agents
 - Elapsed wall-clock
 - Tokens generated
-- Estimated GPT-4 / Claude cost the same simulation would have cost
 - Effective throughput (agents/sec)
 
 These end up in the CLI summary, the HTML dashboard hero card, and the
@@ -15,14 +14,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-# Public 4o / Sonnet rates (mid-2026, USD per 1M tokens). Used only as a
-# transparent reference point for the "cost saved" framing — *not* a precise
-# billing oracle.
-GPT_4O_INPUT_PER_1M = 2.50
-GPT_4O_OUTPUT_PER_1M = 10.00
-SONNET_INPUT_PER_1M = 3.00
-SONNET_OUTPUT_PER_1M = 15.00
-
 # Approximate per-agent token usage for KoreaSim's reaction prompt.
 # system prompt (~300) + user prompt (~200) + response (~80).
 DEFAULT_INPUT_TOKENS_PER_AGENT = 500
@@ -31,7 +22,7 @@ DEFAULT_OUTPUT_TOKENS_PER_AGENT = 80
 
 @dataclass
 class ComputeReceipt:
-    """Cost / scale receipt for one scenario run."""
+    """Scale / throughput receipt for one scenario run."""
 
     n_agents: int
     elapsed_s: float
@@ -50,25 +41,6 @@ class ComputeReceipt:
     def tokens_per_sec(self) -> float:
         return self.total_tokens / max(self.elapsed_s, 1e-6)
 
-    @property
-    def gpt4o_cost_usd(self) -> float:
-        return (
-            self.input_tokens / 1_000_000 * GPT_4O_INPUT_PER_1M
-            + self.output_tokens / 1_000_000 * GPT_4O_OUTPUT_PER_1M
-        )
-
-    @property
-    def sonnet_cost_usd(self) -> float:
-        return (
-            self.input_tokens / 1_000_000 * SONNET_INPUT_PER_1M
-            + self.output_tokens / 1_000_000 * SONNET_OUTPUT_PER_1M
-        )
-
-    @property
-    def local_cost_usd(self) -> float:
-        # BitNet on a CPU = electricity-only. Negligible.
-        return 0.0
-
     def to_dict(self) -> dict:
         return {
             "n_agents": self.n_agents,
@@ -78,10 +50,6 @@ class ComputeReceipt:
             "total_tokens": self.total_tokens,
             "agents_per_sec": round(self.agents_per_sec, 1),
             "tokens_per_sec": round(self.tokens_per_sec, 0),
-            "gpt4o_cost_usd": round(self.gpt4o_cost_usd, 2),
-            "sonnet_cost_usd": round(self.sonnet_cost_usd, 2),
-            "local_cost_usd": 0.0,
-            "savings_vs_gpt4o_usd": round(self.gpt4o_cost_usd, 2),
         }
 
 

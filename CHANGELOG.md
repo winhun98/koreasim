@@ -54,5 +54,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HTML dashboard with Korea province choropleth, emoji people wall,
   demographic stacked bars, and group quotes.
 - 1200×630 social card PNG generator.
-- Computation receipt (BitNet local $0 vs GPT-4o equivalent).
+- Computation receipt (agents/sec, token throughput).
 - 19 tests (persona loader, scenario runner, JSON parser).

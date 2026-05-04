@@ -18,7 +18,7 @@ koreasim/
 │   └── brief.py        # LLM-driven brief extraction + verbatim-quote guard
 ├── analysis/
 │   ├── aggregate.py    # aggregate_by(...) + summarize(...)
-│   └── compute.py      # receipt_for_run (vs-GPT-4o cost)
+│   └── compute.py      # receipt_for_run (agents/sec, token throughput)
 ├── viz/
 │   ├── dashboard.py    # plotly HTML dashboard + Rich text report
 │   ├── korea_map.py    # 17 광역시도 choropleth (Plotly Choropleth)
