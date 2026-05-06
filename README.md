@@ -13,9 +13,7 @@
 
 🌐 **[Try the live dashboards →](https://winhun98.github.io/koreasim/examples/runs/)** · [한국어 README](README.ko.md)
 
-[Quickstart](#-quickstart) · [Live results](#-live-results--real-korean-news-2026-04-2930) · [How it works](#-how-it-works) · [Roadmap](#-roadmap)
-
-> ⭐ **Star to vote on the next feature**: multi-round dialogue · English/JP locale · real-poll calibration. The roadmap follows the votes.
+[Quickstart](#-quickstart) · [Live results](#-live-results--real-korean-news-2026-04-2930) · [How it works](#-how-it-works)
 
 </div>
 
@@ -364,27 +362,6 @@ asyncio.run(main())
 - Qwen3 8B has a baseline RLHF bias toward "neutral". KoreaSim mitigates this with `min_p=0.03` sampling + a stake-elicitation prompt + rejection sampling on empty responses, dropping mean neutral from 64% → 51% (see [`docs/SAMPLING.md`](docs/SAMPLING.md)). The remaining 51% includes legitimate neutrals — e.g. non-수도권 personas on housing-price scenarios.
 - Reasoning length is bounded by `max_tokens` — at the default 800 tokens, ~10% of responses get truncated mid-sentence (the parser salvages what it can via brace-counting + regex repair).
 - BitNet 1.58-bit weights only run efficiently on AVX_VNNI / Apple Silicon — see [Model presets](#-model-presets).
-
----
-
-## 🛣 Roadmap
-
-- [x] Persona loader + filtering + stratified sampling
-- [x] Ollama / OpenAI-compatible backend (Qwen3 8B default)
-- [x] BitNet 1.58-bit preset (best on Apple Silicon)
-- [x] ScenarioRunner — async parallel generation, robust JSON parser
-- [x] Demographic aggregation (age / region / occupation / income / political lean)
-- [x] **Korea province bubble map** (17 광역시도, color = net sentiment)
-- [x] **Emoji-avatar people wall** (직업·연령 emoji, 클릭 → 개인 reasoning)
-- [x] **Auto-generated social card PNG** (1200×630 for X / OG)
-- [x] **Compute receipt** (agents/sec · tokens · throughput)
-- [x] CLI + 5 built-in scenarios
-- [x] **Locale interface** (`koreasim/locales/`) — KR (real, Nemotron-Personas-Korea) + US (Census-inspired stub). See [`docs/LOCALES.md`](docs/LOCALES.md) for adding a new country.
-- [ ] Choropleth Korea map (province polygons)
-- [ ] **Persona ↔ persona dialogue** — let agents argue, not just react
-- [ ] **Multi-round** scenarios — initial reaction → follow-up news → updated stance
-- [ ] BitJury integration — N-model voting per persona for variance reduction
-- [ ] Public benchmark vs. real polls (KSOI, Gallup Korea)
 
 ---
 
